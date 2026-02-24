@@ -223,7 +223,7 @@ async function main() {
     // Affiche les données des produits
     try {
         // Récupère les données des produits
-        let productData = await collectProductsData("http://back:3000/api/products");
+        let productData = await collectProductsData("/api/products");
 
         // Groupe les produits par modèle
         cart = cart.sort();
@@ -368,14 +368,16 @@ async function main() {
             // Affiche un message d'alerte lorsque l'adresse ne contient pas un numéro et un nom de rue ou d'avenue
             let streetRegexp = /[0-9+ +]\brue\b[ +A-Za-z+^0-9]/i;
             let avenueRegexp = /[0-9+ +]\bavenue\b[ +A-Za-z+^0-9]/i;
+            let boulevardRegexp = /[0-9+ +]\bboulevard\b[ +A-Za-z+^0-9]/i;
             let streetValidation = verifyFormData(contact.address, streetRegexp);
             let avenueValidation = verifyFormData(contact.address, avenueRegexp);
+            let boulevardValidation = verifyFormData(contact.address, boulevardRegexp);
             let addressValidation;
             if (contact.address === "") {
                 addressErrorMsg.textContent = "Remplir le champ !"
             } else {
-                if (!streetValidation && !avenueValidation) {
-                    addressErrorMsg.textContent = "Votre adresse doit être composée d'un numéro et d'un nom de rue ou d'avenue.";
+                if (!streetValidation && !avenueValidation && !boulevardValidation) {
+                    addressErrorMsg.textContent = "Votre adresse doit être composée d'un numéro et d'un nom de rue, d'avenue ou de boulevard.";
                 } else {
                     addressValidation = true;
                 }
@@ -445,7 +447,7 @@ async function main() {
             if (firstNameValidation && lastNameValidation && addressValidation && cityValidation && emailValidation) {
 
                 // Envoie les données du formulaire et le tableau d'identifiants vers le back-end  
-                let url = "http://back:3000/api/products/order";
+                let url = "/api/products/order";
                 let data = JSON.stringify({"contact": contact, "products": products});
                 sendDataAndCollectData(url, data)
                     .then(function(data) {

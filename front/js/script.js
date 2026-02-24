@@ -67,7 +67,7 @@
   } 
   
   // Récupère les données des produits 
-  collectProductsData("http://back:3000/api/products")
+  collectProductsData("/api/products")
     .then(function(productsData) {
       // Crée les éléments DOM des produits
       let products = [];

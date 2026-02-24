@@ -1,5 +1,5 @@
 {
-  "name": "kanap-backend",
+  "name": "kanap-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.0",
-    "uuid": "^13.0"
+    "express": "^5.0"
   },
   "devDependencies": {
     "esbuild": "0.27.3"
