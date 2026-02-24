@@ -1,8 +1,8 @@
-const uuid = require('uuid/v1');
-const Product = require('../models/Product');
+import { v4 as uuid} from 'uuid';
+import { find, findById } from '../models/Product.js';
 
-exports.getAllProducts = (req, res, next) => {
-  Product.find().then(
+export function getAllProducts(req, res, next) {
+  find().then(
     (products) => {
       const mappedProducts = products.map((product) => {
         product.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + product.imageUrl;
@@ -15,10 +15,10 @@ exports.getAllProducts = (req, res, next) => {
       res.status(500).send(new Error('Database error!'));
     }
   );
-};
+}
 
-exports.getOneProduct = (req, res, next) => {
-  Product.findById(req.params.id).then(
+export function getOneProduct(req, res, next) {
+  findById(req.params.id).then(
     (product) => {
       if (!product) {
         return res.status(404).send(new Error('Product not found!'));
@@ -31,7 +31,7 @@ exports.getOneProduct = (req, res, next) => {
       res.status(500).send(new Error('Database error!'));
     }
   )
-};
+}
 
 /**
  *
@@ -46,7 +46,7 @@ exports.getOneProduct = (req, res, next) => {
  * products: [string] <-- array of product _id
  *
  */
-exports.orderProducts = (req, res, next) => {
+export function orderProducts(req, res, next) {
   if (!req.body.contact ||
       !req.body.contact.firstName ||
       !req.body.contact.lastName ||
@@ -59,7 +59,7 @@ exports.orderProducts = (req, res, next) => {
   let queries = [];
   for (let productId of req.body.products) {
     const queryPromise = new Promise((resolve, reject) => {
-      Product.findById(productId).then(
+      findById(productId).then(
         (product) => {
           if (!product) {
             reject('Product not found: ' + productId);
@@ -89,4 +89,4 @@ exports.orderProducts = (req, res, next) => {
       return res.status(500).json(new Error(error));
     }
   );
-};
+}

@@ -4,12 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "build": "esbuild server.js --bundle --platform=node --target=node24.11.1 --packages=external --outfile=dist/server.js --format=esm",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
-    "uuid": "^3.3.2"
+    "express": "^5.0",
+    "uuid": "^13.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.3"
   }
 }

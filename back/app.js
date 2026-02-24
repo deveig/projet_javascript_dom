@@ -1,8 +1,11 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import { json, urlencoded } from 'express';
+import path from 'path';
+import router from './routes/product.js';
+import { fileURLToPath } from 'url';
 
-const productRoutes = require('./routes/product');
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use((req, res, next) => {
@@ -15,9 +18,9 @@ app.use((req, res, next) => {
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.static('images'));
 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+app.use(urlencoded({extended: true}));
+app.use(json());
 
-app.use('/api/products', productRoutes);
+app.use('/api/products', router);
 
-module.exports = app;
+export default app;
