@@ -98,7 +98,7 @@
   
   // Récupère l'identifiant du produit
   let idNumber = getUrlParameter("id");
-  let productUrl = "http://localhost:3000/api/products/" + idNumber;
+  let productUrl = "http://back:3000/api/products/" + idNumber;
   
   // Récupère les données du produit
   collectProductsData(productUrl)

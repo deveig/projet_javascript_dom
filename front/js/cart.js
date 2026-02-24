@@ -223,7 +223,7 @@ async function main() {
     // Affiche les données des produits
     try {
         // Récupère les données des produits
-        let productData = await collectProductsData("http://localhost:3000/api/products");
+        let productData = await collectProductsData("http://back:3000/api/products");
 
         // Groupe les produits par modèle
         cart = cart.sort();
@@ -445,7 +445,7 @@ async function main() {
             if (firstNameValidation && lastNameValidation && addressValidation && cityValidation && emailValidation) {
 
                 // Envoie les données du formulaire et le tableau d'identifiants vers le back-end  
-                let url = "http://localhost:3000/api/products/order";
+                let url = "http://back:3000/api/products/order";
                 let data = JSON.stringify({"contact": contact, "products": products});
                 sendDataAndCollectData(url, data)
                     .then(function(data) {
