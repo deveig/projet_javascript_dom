@@ -20,3 +20,6 @@ let orderId = getUrlParameter("orderId");
 let displayedOrder = document.getElementById("orderId");
 
 displayedOrder.textContent = orderId; 
+
+// Supprime les données du localStorage
+localStorage.clear();
