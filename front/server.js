@@ -12,10 +12,21 @@ app.use("/api/products", async (req, res) => {
         const response = await fetch(`http://back:3000${req.originalUrl}`, {
             method: req.method,
             headers: req.headers,
-            body: req.body,
+            body: req.method === 'POST' ? req.body : undefined,
         });
         const data = await response.json();
         res.status(response.status).json(data);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch products" });
+    }
+});
+app.use("/images-kanap", async (req, res) => {
+    try {
+        const response = await fetch(`http://back:3000${req.originalUrl}`, {
+            headers: req.headers
+        });
+        const buffer = await response.arrayBuffer();
+        res.status(response.status).send(Buffer.from(buffer));
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch products" });
     }

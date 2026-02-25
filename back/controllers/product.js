@@ -5,7 +5,8 @@ export function getAllProducts(req, res, next) {
   find().then(
     (products) => {
       const mappedProducts = products.map((product) => {
-        product.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + product.imageUrl;
+        // product.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + product.imageUrl;
+        product.imageUrl = '/images-kanap/' + product.imageUrl;
         return product;
       });
       res.status(200).json(mappedProducts);
@@ -23,7 +24,8 @@ export function getOneProduct(req, res, next) {
       if (!product) {
         return res.status(404).send(new Error('Product not found!'));
       }
-      product.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + product.imageUrl;
+      // product.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + product.imageUrl;
+      product.imageUrl = '/images-kanap/' + product.imageUrl;
       res.status(200).json(product);
     }
   ).catch(
