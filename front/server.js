@@ -31,6 +31,7 @@ app.use("/images-kanap", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch products" });
     }
 });
+app.use('/', express.static(path.join(__dirname, "html")));
 app.use(express.static(__dirname));
 app.listen(3005, () => {
   console.log("Serveur démarré sur le port 3005");
