@@ -36,7 +36,7 @@ function createProduct(apiProductData, localProductData) {
     pictureContainer.setAttribute("class", "cart__item__img");
     let image = document.createElement("img");
     pictureContainer.appendChild(image);
-    image.setAttribute("src", apiProductData.imageUrl);
+    image.setAttribute("src", `/recipe-js${apiProductData.imageUrl}`);
     image.setAttribute("alt", "Photographie d'un canapé");
 
   
@@ -223,7 +223,7 @@ async function main() {
     // Affiche les données des produits
     try {
         // Récupère les données des produits
-        let productData = await collectProductsData("/api/products");
+        let productData = await collectProductsData("/recipe-js/api/products");
 
         // Groupe les produits par modèle
         cart = cart.sort();
@@ -447,7 +447,7 @@ async function main() {
             if (firstNameValidation && lastNameValidation && addressValidation && cityValidation && emailValidation) {
 
                 // Envoie les données du formulaire et le tableau d'identifiants vers le back-end  
-                let url = "/api/products/order";
+                let url = "/recipe-js/api/products/order";
                 let data = JSON.stringify({"contact": contact, "products": products});
                 sendDataAndCollectData(url, data)
                     .then(function(data) {

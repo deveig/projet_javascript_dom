@@ -32,7 +32,7 @@
   
     // Ajoute l'image du produit
     let picture = document.createElement("img");
-    picture.setAttribute("src", productData.imageUrl);
+    picture.setAttribute("src", `/recipe-js${productData.imageUrl}`);
     picture.setAttribute("alt", productData.altTxt);
     article.appendChild(picture);
   
@@ -67,7 +67,7 @@
   } 
   
   // Récupère les données des produits 
-  collectProductsData("/api/products")
+  collectProductsData("/recipe-js/api/products")
     .then(function(productsData) {
       // Crée les éléments DOM des produits
       let products = [];

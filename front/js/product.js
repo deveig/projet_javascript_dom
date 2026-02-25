@@ -42,7 +42,7 @@
     let picture = document.createElement("img");
     let pictureContainer = document.querySelector(".item__img");
     pictureContainer.appendChild(picture);
-    picture.setAttribute("src", productData.imageUrl);
+    picture.setAttribute("src", `/recipe-js${productData.imageUrl}`);
     picture.setAttribute("alt", productData.altTxt);
   
     // Ajoute le titre du produit
@@ -98,7 +98,7 @@
   
   // Récupère l'identifiant du produit
   let idNumber = getUrlParameter("id");
-  let productUrl = "/api/products/" + idNumber;
+  let productUrl = "/recipe-js/api/products/" + idNumber;
   
   // Récupère les données du produit
   collectProductsData(productUrl)
